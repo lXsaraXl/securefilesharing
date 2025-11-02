@@ -201,15 +201,24 @@ function App() {
       toast.error("Enter an email");
       return;
     }
+    if (!selectedFile) {
+      toast.error("No file selected");
+      return;
+    }
     try {
       await axios.post(`${API}/files/share/${selectedFile.id}`, { email: shareEmail }, axiosConfig());
       toast.success(`File shared with ${shareEmail}`);
-      setShareDialog(false);
-      setShareEmail("");
+      closeShareDialog();
       loadFiles();
     } catch (err) {
       toast.error(err.response?.data?.detail || "Share failed");
     }
+  };
+
+  const closeShareDialog = () => {
+    setShareDialog(false);
+    setShareEmail("");
+    setSelectedFile(null);
   };
 
   // ========== ADMIN ==========
