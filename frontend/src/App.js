@@ -663,7 +663,10 @@ function App() {
         </div>
 
         {/* Share Dialog */}
-        <Dialog open={shareDialog} onOpenChange={setShareDialog}>
+        <Dialog open={shareDialog} onOpenChange={(open) => {
+          if (!open) closeShareDialog();
+          else setShareDialog(open);
+        }}>
           <DialogContent data-testid="share-dialog">
             <DialogHeader>
               <DialogTitle>Share File</DialogTitle>
