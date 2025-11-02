@@ -31,7 +31,7 @@ db = client[os.environ['DB_NAME']]
 
 # Security
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-SECRET_KEY = "your-secret-key-for-jwt-token-generation-change-in-production"
+SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret-key-for-development-only')
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
